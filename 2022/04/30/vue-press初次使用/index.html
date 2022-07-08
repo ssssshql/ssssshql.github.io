@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="一、什么是 VuePress ?VuePress 是基于 vue 的极简静态网站生成器，实际上就是一个 vue 的单页应用，内置 webpack，可以用来写文档。详见 VuePress中文网 VuePress 可用于将 markdown 文件展示为 WEB 页面 二、展示效果首页 文档页 三、开始搭建 目标：记录我学习HTMl、CSS、JavaScript的笔记。创建含有三篇文章（HTML、CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-press初次使用">
+<meta property="og:url" content="http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="老鼠杂货铺">
+<meta property="og:description" content="一、什么是 VuePress ?VuePress 是基于 vue 的极简静态网站生成器，实际上就是一个 vue 的单页应用，内置 webpack，可以用来写文档。详见 VuePress中文网 VuePress 可用于将 markdown 文件展示为 WEB 页面 二、展示效果首页 文档页 三、开始搭建 目标：记录我学习HTMl、CSS、JavaScript的笔记。创建含有三篇文章（HTML、CSS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z2Z5aSc6IGG6Zuo,size_20,color_FFFFFF,t_70,g_se,x_16.png">
+<meta property="og:image" content="http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z2Z5aSc6IGG6Zuo,size_20,color_FFFFFF,t_70,g_se,x_16-16513095865441.png">
+<meta property="og:image" content="http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/fe990883181c4bc4be20184d10f26b33.png">
+<meta property="og:image" content="http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/5b03a46a87244215937542f807bd5e83.png">
+<meta property="og:image" content="http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z2Z5aSc6IGG6Zuo,size_20,color_FFFFFF,t_70,g_se,x_16-16513095865442.png">
+<meta property="og:image" content="http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/64744649fda346d09098ea5bf1de9404.png">
+<meta property="article:published_time" content="2022-04-30T09:06:15.000Z">
+<meta property="article:modified_time" content="2022-07-08T02:48:47.758Z">
+<meta property="article:author" content="看着眼睛红着哭着说着什么">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z2Z5aSc6IGG6Zuo,size_20,color_FFFFFF,t_70,g_se,x_16.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>vue-press初次使用</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="老鼠杂货铺" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="الأعلى" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/ssssshql">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2022/07/08/%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2022/04/30/%E5%A5%BD%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&text=vue-press初次使用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&title=vue-press初次使用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&is_video=false&description=vue-press初次使用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=vue-press初次使用&body=Check out this article: http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&title=vue-press初次使用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&title=vue-press初次使用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&title=vue-press初次使用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&title=vue-press初次使用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&name=vue-press初次使用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&t=vue-press初次使用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&title=vue-press初次使用"><i class="fab fa-qq " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-VuePress"><span class="toc-number">1.</span> <span class="toc-text">一、什么是 VuePress ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B1%95%E7%A4%BA%E6%95%88%E6%9E%9C"><span class="toc-number">2.</span> <span class="toc-text">二、展示效果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%96%E9%A1%B5"><span class="toc-number">2.1.</span> <span class="toc-text">首页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E9%A1%B5"><span class="toc-number">2.2.</span> <span class="toc-text">文档页</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA"><span class="toc-number">3.</span> <span class="toc-text">三、开始搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E5%B9%B6%E8%BF%9B%E5%85%A5"><span class="toc-number">3.1.</span> <span class="toc-text">1.创建项目目录并进入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">3.2.</span> <span class="toc-text">2.初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B0%86-VuePress-%E5%AE%89%E8%A3%85%E4%B8%BA%E6%9C%AC%E5%9C%B0%E4%BE%9D%E8%B5%96"><span class="toc-number">3.3.</span> <span class="toc-text">3.将 VuePress 安装为本地依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E5%92%8C%E6%96%87%E4%BB%B6"><span class="toc-number">3.4.</span> <span class="toc-text">4.创建文件夹和文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%96%87%E4%BB%B6%E5%A4%B9%E7%BB%93%E6%9E%84"><span class="toc-number">3.4.1.</span> <span class="toc-text">基本文件夹结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E6%96%87%E4%BB%B6%E5%A4%B9%E7%BB%93%E6%9E%84"><span class="toc-number">3.4.2.</span> <span class="toc-text">文档文件夹结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%9C%A8-package-json-%E4%B8%AD%E6%B7%BB%E5%8A%A0-scripts"><span class="toc-number">3.5.</span> <span class="toc-text">5.在 package.json 中添加 scripts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%85%8D%E7%BD%AE-README-md"><span class="toc-number">3.6.</span> <span class="toc-text">6.配置 README.md</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-number">3.6.1.</span> <span class="toc-text">推荐的用法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E9%85%8D%E7%BD%AE-config-js"><span class="toc-number">3.7.</span> <span class="toc-text">7.配置 config.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E9%85%8D%E7%BD%AE%E5%AE%8C%E6%88%90%EF%BC%8C%E6%9F%A5%E7%9C%8B%E6%95%88%E6%9E%9C"><span class="toc-number">3.8.</span> <span class="toc-text">8.配置完成，查看效果</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        vue-press初次使用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看着眼睛红着哭着说着什么</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-04-30T09:06:15.000Z" itemprop="datePublished">2022-04-30</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/vue/" rel="tag">vue</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="一、什么是-VuePress"><a href="#一、什么是-VuePress" class="headerlink" title="一、什么是 VuePress ?"></a>一、什么是 VuePress ?</h2><p><strong>VuePress</strong> 是基于 vue 的极简静态网站生成器，实际上就是一个 vue 的单页应用，内置 <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=webpack&spm=1001.2101.3001.7020">webpack</a>，可以用来写文档。详见 <a target="_blank" rel="noopener" href="https://vuepress.docschina.org/">VuePress中文网</a></p>
+<p><strong>VuePress</strong> 可用于将 markdown 文件展示为 WEB 页面</p>
+<h2 id="二、展示效果"><a href="#二、展示效果" class="headerlink" title="二、展示效果"></a>二、展示效果</h2><h3 id="首页"><a href="#首页" class="headerlink" title="首页"></a><strong>首页</strong></h3><p><img src="/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z2Z5aSc6IGG6Zuo,size_20,color_FFFFFF,t_70,g_se,x_16.png" alt="在这里插入图片描述"></p>
+<h3 id="文档页"><a href="#文档页" class="headerlink" title="文档页"></a><strong>文档页</strong></h3><p><img src="/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z2Z5aSc6IGG6Zuo,size_20,color_FFFFFF,t_70,g_se,x_16-16513095865441.png" alt="在这里插入图片描述"></p>
+<h2 id="三、开始搭建"><a href="#三、开始搭建" class="headerlink" title="三、开始搭建"></a>三、开始搭建</h2><blockquote>
+<p>目标：记录我学习HTMl、CSS、JavaScript的笔记。创建含有三篇文章（HTML、CSS、JavaScript）的项目</p>
+</blockquote>
+<blockquote>
+<p><strong>前提条件</strong></p>
+<p>使用 VuePress 需要先安装 <a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js</a>，版本号要在 8.6 以上</p>
+</blockquote>
+<h3 id="1-创建项目目录并进入"><a href="#1-创建项目目录并进入" class="headerlink" title="1.创建项目目录并进入"></a>1.创建项目目录并进入</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir my<span class="literal">-vuepress</span></span><br><span class="line"><span class="built_in">cd</span> my<span class="literal">-vuepress</span></span><br><span class="line"><span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-初始化"><a href="#2-初始化" class="headerlink" title="2.初始化"></a>2.初始化</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn init <span class="literal">-y</span></span><br><span class="line"><span class="comment"># 或者使用 npm init -y</span></span><br><span class="line"><span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+<p>以下都将使用 yarn 包管理器</p>
+<h3 id="3-将-VuePress-安装为本地依赖"><a href="#3-将-VuePress-安装为本地依赖" class="headerlink" title="3.将 VuePress 安装为本地依赖"></a>3.将 VuePress 安装为本地依赖</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add <span class="literal">-D</span> vuepress	<span class="comment"># 安装为开发依赖</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-创建文件夹和文件"><a href="#4-创建文件夹和文件" class="headerlink" title="4.创建文件夹和文件"></a>4.创建文件夹和文件</h3><h4 id="基本文件夹结构"><a href="#基本文件夹结构" class="headerlink" title="基本文件夹结构"></a>基本文件夹结构</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">my-vuepress</span><br><span class="line">├─── docs</span><br><span class="line">│   ├── README.md</span><br><span class="line">│   └── .vuepress</span><br><span class="line">│       ├── public</span><br><span class="line">│			├── logo.png</span><br><span class="line">│       └── config.js</span><br><span class="line">└── package.json</span><br><span class="line">12345678</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/fe990883181c4bc4be20184d10f26b33.png" alt="在这里插入图片描述"></p>
+<h4 id="文档文件夹结构"><a href="#文档文件夹结构" class="headerlink" title="文档文件夹结构"></a>文档文件夹结构</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">my-vuepress</span><br><span class="line">├─── docs</span><br><span class="line">│   ├── css</span><br><span class="line">│   ├── JavaScript</span><br><span class="line">│   ├── html</span><br><span class="line">│       ├── assets</span><br><span class="line">│       ├── REMDME.md</span><br><span class="line">│       ├── HTML01.md</span><br><span class="line">│       ├── HTML02.md</span><br><span class="line">│       ├── HTML03.md</span><br><span class="line">│       ├── HTML04.md</span><br><span class="line">│       ├── HTML05.md</span><br><span class="line">123456789101112</span><br></pre></td></tr></table></figure>
+
+<p>其中，每个文章的文件夹内都需要有一个 README.md 文件，该文件是每篇文章的首页。剩余的md文件是子页面。assets 存放图片等内容，<strong>md 文件中不要使用一级标题</strong>，引用资源时路径使用相对路径</p>
+<h3 id="5-在-package-json-中添加-scripts"><a href="#5-在-package-json-中添加-scripts" class="headerlink" title="5.在 package.json 中添加 scripts"></a>5.在 package.json 中添加 scripts</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vuepress dev docs&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vuepress build docs&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="number">1234</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>效果如下：</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;my-vuepress&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;index.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;license&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MIT&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;devDependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;vuepress&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^1.8.2&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vuepress dev docs&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vuepress build docs&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"><span class="number">12345678910111213</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-配置-README-md"><a href="#6-配置-README-md" class="headerlink" title="6.配置 README.md"></a>6.配置 README.md</h3><p>README.md 是项目首页的内容，<strong>如果想快速看到效果</strong>，可以直接在里面写一段内容，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## 欢迎访问我的第一个页面</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>然后运行</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn dev</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>即可看到页面效果：<br><img src="/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/5b03a46a87244215937542f807bd5e83.png" alt="在这里插入图片描述"></p>
+<h4 id="推荐的用法"><a href="#推荐的用法" class="headerlink" title="推荐的用法"></a>推荐的用法</h4><p><strong>推荐在 README.md 文件中使用 YAML 语法添加内容生成首页</strong></p>
+<p><strong>示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">home: true</span><br><span class="line">heroImage: logo.png</span><br><span class="line">tagline: HTML + CSS + JavaScript</span><br><span class="line">actionText: 开始学习 →</span><br><span class="line">actionLink: /HTML/</span><br><span class="line">features:</span><br><span class="line">  - title: HTML</span><br><span class="line">    details: 超文本标记语言</span><br><span class="line">  - title: CSS</span><br><span class="line">    details: 层叠样式表</span><br><span class="line">  - title: JavaScript</span><br><span class="line">    details: JS脚本</span><br><span class="line">footer: 静夜聆雨 © 2021</span><br><span class="line">---</span><br><span class="line">123456789101112131415</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>actionText: 开始学习 →<br>actionLink: &#x2F;HTML&#x2F;</p>
+<p>点击开始学习，会先进入“HTML”的页面</p>
+</blockquote>
+<p><strong>效果</strong></p>
+<p><img src="/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z2Z5aSc6IGG6Zuo,size_20,color_FFFFFF,t_70,g_se,x_16-16513095865442.png" alt="在这里插入图片描述"></p>
+<h3 id="7-配置-config-js"><a href="#7-配置-config-js" class="headerlink" title="7.配置 config.js"></a>7.配置 config.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;我的vuepress&#x27;</span>, <span class="comment">//网站标题</span></span><br><span class="line">    <span class="attr">description</span>: <span class="string">&#x27;我的个人网站&#x27;</span>, <span class="comment">//网站描述</span></span><br><span class="line">    <span class="attr">head</span>: [ <span class="comment">//注入到当前HTMl页面 &lt;head&gt; 中的标签</span></span><br><span class="line">        [<span class="string">&#x27;link&#x27;</span>, &#123;</span><br><span class="line">            <span class="attr">rel</span>: <span class="string">&#x27;icon&#x27;</span>,</span><br><span class="line">            <span class="attr">href</span>: <span class="string">&#x27;/logo.png&#x27;</span> <span class="comment">//图片应存放在public目录下</span></span><br><span class="line">        &#125;], <span class="comment">// 增加一个自定义的 favicon(网页标签的图标)</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">markdown</span>: &#123;</span><br><span class="line">        <span class="attr">lineNumbers</span>: <span class="literal">false</span> <span class="comment">// 代码块显示行号</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">themeConfig</span>: &#123;</span><br><span class="line">        <span class="attr">nav</span>: [&#123; <span class="comment">//导航栏</span></span><br><span class="line">                <span class="attr">text</span>: <span class="string">&#x27;HTML笔记&#x27;</span>,</span><br><span class="line">                <span class="attr">link</span>: <span class="string">&#x27;/html/&#x27;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">text</span>: <span class="string">&#x27;CSS笔记&#x27;</span>,</span><br><span class="line">                <span class="attr">link</span>: <span class="string">&#x27;/css/&#x27;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">text</span>: <span class="string">&#x27;JS笔记&#x27;</span>,</span><br><span class="line">                <span class="attr">link</span>: <span class="string">&#x27;/JavaScript/&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">sidebar</span>: &#123;</span><br><span class="line">            <span class="comment">//sidebar: &#x27;auto&#x27;, // 侧边栏配置,设置auto是自动配置</span></span><br><span class="line">            <span class="comment">//sidebarDepth: 2, // 侧边栏显示2级</span></span><br><span class="line"></span><br><span class="line">            <span class="string">&#x27;/html/&#x27;</span>: [&#123;</span><br><span class="line">                <span class="attr">title</span>: <span class="string">&#x27;HTML笔记&#x27;</span>,</span><br><span class="line">                <span class="attr">sidebarDepth</span>: <span class="number">2</span>,</span><br><span class="line">                <span class="attr">collapsable</span>: <span class="literal">true</span>, <span class="comment">//可折叠</span></span><br><span class="line">                <span class="attr">children</span>: [<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;HTML01&#x27;</span>, <span class="string">&#x27;HTML02&#x27;</span>, <span class="string">&#x27;HTML03&#x27;</span>, <span class="string">&#x27;HTML04&#x27;</span>, <span class="string">&#x27;HTML05&#x27;</span>] <span class="comment">//2级页面，第一个设置为空字符串时，显示的是README.md的内容</span></span><br><span class="line">            &#125;],</span><br><span class="line">            <span class="string">&#x27;/css/&#x27;</span>: [&#123;</span><br><span class="line">                <span class="attr">title</span>: <span class="string">&#x27;CSS笔记&#x27;</span>,</span><br><span class="line">                <span class="attr">sidebarDepth</span>: <span class="number">2</span>,</span><br><span class="line">                <span class="attr">collapsable</span>: <span class="literal">true</span>,</span><br><span class="line">            &#125;],</span><br><span class="line">            <span class="string">&#x27;/JavaScript/&#x27;</span>: [&#123;</span><br><span class="line">                <span class="attr">title</span>: <span class="string">&#x27;JS笔记&#x27;</span>,</span><br><span class="line">                <span class="attr">sidebarDepth</span>: <span class="number">2</span>,</span><br><span class="line">                <span class="attr">collapsable</span>: <span class="literal">true</span>,</span><br><span class="line">            &#125;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">// 插件，安装后才能使用 ，安装方法 yarn add -D 插件名称</span></span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="string">&#x27;@vuepress/plugin-back-to-top&#x27;</span>, <span class="comment">//返回顶部的插件</span></span><br><span class="line">        <span class="string">&#x27;@vuepress/plugin-medium-zoom&#x27;</span>, <span class="comment">//图片放大的插件</span></span><br><span class="line">        [</span><br><span class="line">            <span class="string">&#x27;one-click-copy&#x27;</span>,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">copyMessage</span>: <span class="string">&#x27;复制成功&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        [<span class="string">&#x27;vuepress-plugin-code-copy&#x27;</span>, <span class="literal">true</span>] <span class="comment">//一键复制的插件</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="8-配置完成，查看效果"><a href="#8-配置完成，查看效果" class="headerlink" title="8.配置完成，查看效果"></a>8.配置完成，查看效果</h3><p>运行 <code>yarn dev</code>，启动服务器</p>
+<p><img src="/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/64744649fda346d09098ea5bf1de9404.png" alt="在这里插入图片描述"></p>
+<p>个人博客就搭建好啦！</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/ssssshql">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-VuePress"><span class="toc-number">1.</span> <span class="toc-text">一、什么是 VuePress ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B1%95%E7%A4%BA%E6%95%88%E6%9E%9C"><span class="toc-number">2.</span> <span class="toc-text">二、展示效果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%96%E9%A1%B5"><span class="toc-number">2.1.</span> <span class="toc-text">首页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E9%A1%B5"><span class="toc-number">2.2.</span> <span class="toc-text">文档页</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA"><span class="toc-number">3.</span> <span class="toc-text">三、开始搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E5%B9%B6%E8%BF%9B%E5%85%A5"><span class="toc-number">3.1.</span> <span class="toc-text">1.创建项目目录并进入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">3.2.</span> <span class="toc-text">2.初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B0%86-VuePress-%E5%AE%89%E8%A3%85%E4%B8%BA%E6%9C%AC%E5%9C%B0%E4%BE%9D%E8%B5%96"><span class="toc-number">3.3.</span> <span class="toc-text">3.将 VuePress 安装为本地依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E5%92%8C%E6%96%87%E4%BB%B6"><span class="toc-number">3.4.</span> <span class="toc-text">4.创建文件夹和文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%96%87%E4%BB%B6%E5%A4%B9%E7%BB%93%E6%9E%84"><span class="toc-number">3.4.1.</span> <span class="toc-text">基本文件夹结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E6%96%87%E4%BB%B6%E5%A4%B9%E7%BB%93%E6%9E%84"><span class="toc-number">3.4.2.</span> <span class="toc-text">文档文件夹结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%9C%A8-package-json-%E4%B8%AD%E6%B7%BB%E5%8A%A0-scripts"><span class="toc-number">3.5.</span> <span class="toc-text">5.在 package.json 中添加 scripts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%85%8D%E7%BD%AE-README-md"><span class="toc-number">3.6.</span> <span class="toc-text">6.配置 README.md</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-number">3.6.1.</span> <span class="toc-text">推荐的用法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E9%85%8D%E7%BD%AE-config-js"><span class="toc-number">3.7.</span> <span class="toc-text">7.配置 config.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E9%85%8D%E7%BD%AE%E5%AE%8C%E6%88%90%EF%BC%8C%E6%9F%A5%E7%9C%8B%E6%95%88%E6%9E%9C"><span class="toc-number">3.8.</span> <span class="toc-text">8.配置完成，查看效果</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&text=vue-press初次使用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&title=vue-press初次使用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&is_video=false&description=vue-press初次使用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=vue-press初次使用&body=Check out this article: http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&title=vue-press初次使用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&title=vue-press初次使用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&title=vue-press初次使用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&title=vue-press初次使用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&name=vue-press初次使用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&t=vue-press初次使用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2022/04/30/vue-press%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/&title=vue-press初次使用"><i class="fab fa-qq fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2022-2099
+    看着眼睛红着哭着说着什么
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/ssssshql">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
