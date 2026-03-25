@@ -173,7 +173,7 @@ utterances:
   repo: ssssshql/ssssshql.github.io
   issue_term: pathname
   label: Comment
-  theme: github-light
+  theme: github-dark
 
 # Fill in your Google Analytics tracking ID to enable Google Analytics.
 google_analytics:
