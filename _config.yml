@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: ssssshqlの博客
+title: 关于那些我所知道の一切
 subtitle: ''
 description: ''
 keywords:
 author: ssssshql
-language: zh
+language: zh-CN
 timezone: ''
 
 # URL
@@ -93,10 +93,11 @@ include:
 exclude:
 ignore:
 
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: maple
+theme: cactus
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
