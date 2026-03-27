@@ -1,3 +1,10 @@
+---
+title: hexo工具vibe coding记录
+date: 2026-03-25 14:00:00
+tags: [hexo]
+categories: [hexo]
+---
+
 最近公司比较闲，又折腾起 hexo 来了。发现在 Android 上没有什么好用的写博客工具，索性用 Flutter 撸了一个，支持仓库的推拉和文章的增删改查。
 
 ![](https://picgo.19991029.xyz/%E8%90%BD%E5%9C%B0%E9%A1%B5.png)
