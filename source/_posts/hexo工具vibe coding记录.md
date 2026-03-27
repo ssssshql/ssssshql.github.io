@@ -19,7 +19,7 @@
 
 新增、修改、删除文章后推送，等待 GitHub Actions 自动部署即可。
 
-<img src="C:\Users\Administrator\xwechat_files\wxid_rintbtedevdh22_a165\temp\RWTemp\2026-03\9e20f478899dc29eb19741386f9343c8\91f5c3e15047466bb9cc66dd75bc8902.jpg" alt="91f5c3e15047466bb9cc66dd75bc8902" style="zoom: 15%;" /> <img src="C:\Users\Administrator\xwechat_files\wxid_rintbtedevdh22_a165\temp\RWTemp\2026-03\9e20f478899dc29eb19741386f9343c8\d4249b62e2b45c6c06e147784d782b3c.jpg" alt="d4249b62e2b45c6c06e147784d782b3c" style="zoom:15%;" /> <img src="C:\Users\Administrator\xwechat_files\wxid_rintbtedevdh22_a165\temp\RWTemp\2026-03\9e20f478899dc29eb19741386f9343c8\4e61e6d046a38bc9e1549189f8bc6abd.jpg" alt="4e61e6d046a38bc9e1549189f8bc6abd" style="zoom:15%;" />
+<img src="https://picgo.19991029.xyz/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260327222012_53_2.jpg" alt="微信图片_20260327222012_53_2" style="zoom:15%;" /> <img src="https://picgo.19991029.xyz/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260327222013_54_2.jpg" alt="微信图片_20260327222013_54_2" style="zoom:15%;" /> <img src="https://picgo.19991029.xyz/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260327222013_55_2.jpg" alt="微信图片_20260327222013_55_2" style="zoom:15%;" />  
 
 ## 关于项目
 
@@ -28,3 +28,4 @@
 项目已开源在 GitHub，欢迎提建议：[blog.19991029.xyz/open_hexo](https://blog.19991029.xyz/open_hexo)
 
 软件支持应用内更新。
+
