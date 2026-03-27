@@ -1,6 +1,6 @@
 ---
 title: hexo工具vibe coding记录
-date: 2026-03-25 14:00:00
+date: 2026-03-27 22:30:00
 tags: [hexo]
 categories: [hexo]
 ---
