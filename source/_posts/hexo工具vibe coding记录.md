@@ -1,43 +1,30 @@
----
-title: test
-date: 2026-03-27 23:00:00
-tags:
-  - Node.js
-  - pnpm
-  - 工具
----
+最近公司比较闲，又折腾起 hexo 来了。发现在 Android 上没有什么好用的写博客工具，索性用 Flutter 撸了一个，支持仓库的推拉和文章的增删改查。
 
-最近公司非常闲，又整起之前的hexo博客来了，之前也是搭了非常多次，但基本都是写几次就不再写了。这几天在使用中突然发现hexo在手机上一直没有什么比较好的方式来写博客，之前看到的方式都是使用termux之类的方式，但我不是很喜欢。
+![](https://picgo.19991029.xyz/%E8%90%BD%E5%9C%B0%E9%A1%B5.png)
 
-最近vibe coding 挺火的，我试着用flutter实现了一个hexo的小工具，目前支持 写博客，推送，拉取 ，克隆等，目前是最基础的一个样子，可能还有很多bug之类的还没发现
+## 使用演示
 
-下面给大家分享一下这个工具的使用，我已经把它开源到了github上。
+### 配置仓库
 
-接下来我使用我的手机来演示一下如何使用：
+需要配置三项信息：
+- 仓库地址
+- 用户名
+- 访问令牌
 
-软件大概就是这样，
+访问令牌获取：https://github.com/settings/personal-access-tokens
 
-首先需要配置hexo仓库地址
+配置完成后即可 clone 仓库，之后可以进行文章的查看、删除、新增、修改等操作。
 
-这个访问令牌是用来推送仓库的，需要到github上申请，
+### 文章操作
 
-这些就ok了，可以去拉仓库了
+新增、修改、删除文章后推送，等待 GitHub Actions 自动部署即可。
 
+<img src="C:\Users\Administrator\xwechat_files\wxid_rintbtedevdh22_a165\temp\RWTemp\2026-03\9e20f478899dc29eb19741386f9343c8\91f5c3e15047466bb9cc66dd75bc8902.jpg" alt="91f5c3e15047466bb9cc66dd75bc8902" style="zoom: 15%;" /> <img src="C:\Users\Administrator\xwechat_files\wxid_rintbtedevdh22_a165\temp\RWTemp\2026-03\9e20f478899dc29eb19741386f9343c8\d4249b62e2b45c6c06e147784d782b3c.jpg" alt="d4249b62e2b45c6c06e147784d782b3c" style="zoom:15%;" /> <img src="C:\Users\Administrator\xwechat_files\wxid_rintbtedevdh22_a165\temp\RWTemp\2026-03\9e20f478899dc29eb19741386f9343c8\4e61e6d046a38bc9e1549189f8bc6abd.jpg" alt="4e61e6d046a38bc9e1549189f8bc6abd" style="zoom:15%;" />
 
+## 关于项目
 
-然后看看我的博客网站，是和这个同步的
+目前功能比较简单，后续会慢慢补充。
 
-然后我来演示一下文章的增删改查
+项目已开源在 GitHub，欢迎提建议：[blog.19991029.xyz/open_hexo](https://blog.19991029.xyz/open_hexo)
 
-以及推送部署
-
-这样就推送成功了，我们等git action 部署就可以了
-
-
-
-可以看到内容同步到博客了，实际上这个工具就是用来推拉仓库的作用，部署还是需要靠git action。
-
-然后我们来试试修改，删除
-
-
-
+软件支持应用内更新。
