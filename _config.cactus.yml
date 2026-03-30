@@ -45,7 +45,13 @@ social_links:
 
 # Customize the overview with displaying a tagcloud on the index page.
 # Options: https://hexo.io/docs/helpers.html#tagcloud
-tags_overview: true
+tags_overview:
+  min_font: 12      # 最小字体
+  max_font: 12      # 最大字体
+  amount: 10        # 显示标签数量（可选）
+  color: false       # 启用颜色渐变（可选）
+  start_color: '#4a90e2'  # 起始颜色（可选）
+  end_color: '#c71585'    # 结束颜色（可选）
 
 # Customize the overview with the most recent blog posts on the index page.
 # Options:
@@ -54,7 +60,7 @@ tags_overview: true
 #   - sort_updated: sort posts by last modification date instead of creation date.
 posts_overview:
   show_all_posts: true
-  post_count: 10
+  post_count: 5
   sort_updated: false
 
 # Customize the archive view.
@@ -212,4 +218,3 @@ cdn:
   font_awesome: https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css
   justified_gallery_css: https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css
   justified_gallery_js: https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js
-
