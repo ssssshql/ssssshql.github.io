@@ -1,7 +1,7 @@
 ---
 title: Flutter 通过 GitHub Actions 打包 iOS 版本
 date: 2026-04-01 17:22:00
-tags: [Flutter, iOS, GitHub Actions]名称Bundle ID平台操作liftDispatchSdkcom.smc.liftDispatchSdkUNIVERSAL 
+tags: [Flutter, iOS, GitHub Actions]
 ---
 
 使用 GitHub Actions 自动化打包 iOS 应用，无需 Mac 电脑即可完成整个流程。
