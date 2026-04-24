@@ -33,9 +33,14 @@ categories:
 
 1.  进入域名 `19991029.xyz` 的管理界面。
 2.  点击左侧菜单的 **Workers 路由 (Workers Routes)** -> **添加路由 (Add route)**。
+
+![在 Cloudflare 后台找到 Workers 路由添加按钮]()
+
 3.  **路由 (Route)** 填入：`bit.19991029.xyz/*`
 4.  **Worker**：选择你想要触发的 Worker 项目。
 5.  点击 **保存**。
+
+![填写 Workers 路由详情并保存]()
 
 > **特别注意**：路由末尾**必须**加上 `/*`（即 `bit.19991029.xyz/*`），这样才能确保该域名下的所有子路径都能正确触发 Worker。
 
@@ -51,6 +56,8 @@ categories:
 3. 请求进入 Cloudflare 边缘节点。
 4. 节点匹配到 **Workers 路由** `bit.19991029.xyz/*`。
 5. Worker 被触发并处理请求。
+
+![方案逻辑架构示意图]()
 
 这种方案直接复用了 SaaS 优选的链路，无需为每个 Worker 单独配置复杂的 DNS 记录，非常高效。
 

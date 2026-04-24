@@ -47,3 +47,10 @@ To ensure the commit history displays the official Gemini avatar and links to th
 - **Name:** `gemini-code-assist[bot]`
 - **Email:** `gemini-code-assist[bot]@users.noreply.github.com`
 
+## Collaboration Norms
+
+### Review & Push Workflow
+- **No Automatic Pushing**: After creating or modifying posts, perform a local commit and notify the user for inspection. Do **NOT** execute `git push` unless explicitly directed by the user.
+- **Image Placeholders**: For non-trivial articles, insert descriptive image placeholders (e.g., `![Action Description]()`) in appropriate locations to facilitate manual image uploading by the user.
+
+
