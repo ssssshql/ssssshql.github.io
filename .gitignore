@@ -7,3 +7,6 @@ public/
 .deploy*/
 _multiconfig.yml
 /.idea
+
+# Local Claude Code settings
+.claude/settings.local.json
