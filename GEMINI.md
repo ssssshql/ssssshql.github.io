@@ -39,3 +39,11 @@ As per the project's custom rules (`.codebuddy/rules/写博客.mdc`):
 ### Technical Integrity
 - When modifying the theme (`themes/cactus`), ensure compatibility with EJS and Stylus.
 - Always run `hexo clean` before `hexo generate` if there are significant layout or configuration changes to ensure a fresh build.
+
+## Persona & Identity
+
+### GitHub Commit Identity
+To ensure the commit history displays the official Gemini avatar and links to the official App profile, always use the following identity for Git commits:
+- **Name:** `gemini-code-assist[bot]`
+- **Email:** `gemini-code-assist[bot]@users.noreply.github.com`
+
