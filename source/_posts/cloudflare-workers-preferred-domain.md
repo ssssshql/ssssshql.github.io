@@ -34,32 +34,39 @@ categories:
 1.  进入域名 `19991029.xyz` 的管理界面。
 2.  点击左侧菜单的 **Workers 路由 (Workers Routes)** -> **添加路由 (Add route)**。
 
-![在 Cloudflare 后台找到 Workers 路由添加按钮]()
+![在 Cloudflare 后台找到 Workers 路由添加按钮](https://picgo.19991029.xyz/image-20260424165658014.png)
 
 3.  **路由 (Route)** 填入：`bit.19991029.xyz/*`
 4.  **Worker**：选择你想要触发的 Worker 项目。
 5.  点击 **保存**。
 
-![填写 Workers 路由详情并保存]()
+![填写 Workers 路由详情并保存](https://picgo.19991029.xyz/image-20260424165722493.png)
 
 > **特别注意**：路由末尾**必须**加上 `/*`（即 `bit.19991029.xyz/*`），这样才能确保该域名下的所有子路径都能正确触发 Worker。
 
 ---
-
 ### 为什么这样做？
 
 在这种配置下，你**不需要**在 Workers 的“自定义域”中添加域名，只需要使用“Workers 路由”。
 
-**流量流向分析：**
-1. 用户访问 `bit.19991029.xyz`。
-2. DNS 解析到 `js.0112306.xyz`，最终指向 **优选域名 `visa.cn` 的 IP**。
-3. 请求进入 Cloudflare 边缘节点。
-4. 节点匹配到 **Workers 路由** `bit.19991029.xyz/*`。
-5. Worker 被触发并处理请求。
+**流量流向示意图：**
 
-![方案逻辑架构示意图]()
+```text
+[ 用户访问 ] bit.19991029.xyz
+      |
+      | (DNS 解析: CNAME -> js.0112306.xyz -> visa.cn)
+      v
+[ 优选 IP 节点 ] (Cloudflare Edge)
+      |
+      | (识别域名并匹配 Workers 路由)
+      v
+[ bit.19991029.xyz/* ]
+      |
+      | (触发执行)
+      v
+[ Worker 程序 ]
+```
 
 这种方案直接复用了 SaaS 优选的链路，无需为每个 Worker 单独配置复杂的 DNS 记录，非常高效。
-
 ---
 *记录于 2026-04-24，基于 SaaS 优选架构优化。*
