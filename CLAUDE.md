@@ -93,3 +93,9 @@ Patterns observed in existing posts (`source/_posts/*.md`):
   - Final posts often embed images via `https://picgo.19991029.xyz/...` and sometimes use HTML `<img ... style="zoom:...">` for side-by-side or size control.
 - **Front-matter**: always include `title` + `date`. Tags/categories are commonly used and can be inline arrays (`tags: [a, b]`) or YAML lists.
 
+### User writing preferences (explicit)
+
+- Use the **actual current local time** for post `date`; avoid fixed placeholder times.
+- In troubleshooting posts, explicitly突出“真正踩坑点/根因”（例如权限所有者是 `TrustedInstaller`），避免只给表面操作步骤。
+- Keep room for screenshots in key sections; final images are often added manually with `https://picgo.19991029.xyz/...` links.
+
