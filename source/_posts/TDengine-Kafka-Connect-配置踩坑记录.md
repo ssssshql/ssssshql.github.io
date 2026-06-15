@@ -74,7 +74,6 @@ services:
       CONNECT_PLUGIN_PATH: "/usr/share/java,/opt/kafka/plugins"
     volumes:
       - ./data/kafka-connect/plugins:/opt/kafka/plugins
-      - ./data/kafka-connect/sdk:/opt/sdk
     networks:
       - kafka-net
     depends_on:
@@ -120,11 +119,17 @@ networks:
 # 下载 TDengine Client
 wget https://www.taosdata.com/assets-download/3.0/TDengine-client-3.3.6.13-Linux-x64.tar.gz
 
-# 解压到指定目录
+# 解压
 tar -xzf TDengine-client-3.3.6.13-Linux-x64.tar.gz
+
+# 进入解压目录
+cd TDengine-client-3.3.6.13
+
+# 执行安装脚本（需要 root 权限）
+sudo ./install_client.sh
 ```
 
-将解压后的目录挂载到容器的 `/opt/sdk` 目录（参考上面的 docker-compose 配置）。
+**重要说明**：执行 `install_client.sh` 脚本后，系统会安装 TDengine Client 及其依赖的 `.so` 文件到系统目录（通常是 `/usr/local/taos/`）。这些 `.so` 文件是 Kafka Connect 插件正常运行所必需的。
 
 ### 坑 3：必须使用 confluentinc/cp-kafka-connect 镜像
 
@@ -179,6 +184,12 @@ curl -X POST http://localhost:8083/connectors \
   -d @sink-config.json
 ```
 
+## 删除 Connector
+
+```bash
+curl -X DELETE http://localhost:8083/connectors/TDengineSinkConnector
+```
+
 ## 验证连接
 
 ```bash
@@ -209,7 +220,7 @@ meters,location=California.LosAngeles,groupid=2 current=11.8,voltage=221,phase=0
 使用 TDengine Kafka Connect 时需要注意以下几点：
 
 1. **插件下载**：直接从 GitHub Releases 下载即可，无需自己构建
-2. **Client 安装**：必须安装 TDengine Client，并将其挂载到容器中
+2. **Client 安装**：必须安装 TDengine Client，解压后执行 `install_client.sh` 脚本安装
 3. **镜像选择**：必须使用 `confluentinc/cp-kafka-connect` 镜像，否则会遇到依赖问题
 4. **数据格式**：推荐使用 InfluxDB Line Protocol 格式，配置 `db.schemaless: line`
 5. **时间精度**：`data.precision` 必须与实际数据的时间戳精度匹配
