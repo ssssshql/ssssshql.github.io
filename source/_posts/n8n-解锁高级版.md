@@ -1,67 +1,96 @@
 ---
-title: n8n 解锁高级版（Enterprise 功能）
+title: n8n 2.28.x 解锁高级版（Enterprise 功能）
 date: 2026-07-02 13:00:00
-tags: [n8n, Docker, 自动化, 破解]
+tags: [n8n, Docker, 自动化]
 categories: 工具
-description: n8n 2.28.3 版本手动解锁 Enterprise 功能，通过修改 license.js 实现全功能开启
+description: n8n 2.28.3/2.28.4 版本通过挂载修改后的 license.js 解锁 Enterprise 功能，避免 user:root 导致的数据丢失问题
 ---
 
-n8n 自部署版本默认只开启了基础功能，很多高级特性（如 Git 同步、RBAC、变量等）需要 License 才能解锁。本文记录手动修改 license.js 绕过验证的方法。
+n8n 自部署版本默认只开启了基础功能，很多高级特性（如 Variables、External Secrets、RBAC、Workflow History 等）需要 License 才能解锁。本文记录通过挂载修改后的 `license.js` 绕过验证的方法。
 
 ## 前置条件
 
 - Docker + Docker Compose
-- n8n 版本：**2.28.3**（其他版本需验证路径）
+- n8n 版本：**2.28.3 / 2.28.4**
 - 验证日期：**2026-07-02**
 
-## Docker Compose 配置
+## 方案选择
+
+网上常见的做法是在 `entrypoint` 中用 `sed` 修改 `license.js`，但这需要容器以 `root` 用户运行。实际测试发现加了 `user: root` 后重启会丢失所有数据（文件权限问题导致）。
+
+更稳妥的做法：**提前准备好修改好的 `license.js`，以只读卷挂载进去**。
+
+## 制作修改后的 license.js
+
+先启动一个临时容器，把原始的 `license.js` 复制出来修改：
+
+```bash
+# 创建临时容器
+docker run -d --name temp-n8n hotwa/n8n-chinese:2.28.4
+
+# 复制 license.js 到当前目录
+docker cp temp-n8n:/usr/local/lib/node_modules/n8n/dist/license.js ./license.js
+
+# 停止并删除临时容器
+docker rm -f temp-n8n
+```
+
+修改 `license.js` 中的三个关键方法：
+
+找到 `isLicensed(feature) {` 这一行，将其改为：
+
+```javascript
+isLicensed(feature) { if (feature.endsWith("apiDisabled") || feature.endsWith("showNonProdBanner")) return false; return true; // }
+```
+
+找到 `getValue(feature) {` 这一行，将其改为：
+
+```javascript
+getValue(feature) { if (feature === 'planName') return 'Enterprise'; return -1; // }
+```
+
+找到 `getPlanName() {` 这一行，将其改为：
+
+```javascript
+getPlanName() { return 'Enterprise'; // }
+```
+
+也可以用 `sed` 一键修改：
+
+```bash
+sed -i 's/isLicensed(feature) {/isLicensed(feature) { if (feature.endsWith("apiDisabled") || feature.endsWith("showNonProdBanner")) return false; return true; \/\/ /' license.js
+sed -i "s/getValue(feature) {/getValue(feature) { if (feature === 'planName') return 'Enterprise'; return -1; \/\/ /" license.js
+sed -i "s/getPlanName() {/getPlanName() { return 'Enterprise'; \/\/ /" license.js
+```
+
+## Docker Compose 配置（仅主应用）
 
 ```yaml
 services:
   n8n:
-    image: n8nio/n8n:2.28.3
+    container_name: n8n
+    image: hotwa/n8n-chinese:2.28.4
     restart: always
+    ports:
+      - 5678:5678
     volumes:
       - ./data:/home/node/.n8n
+      - ./license.js:/usr/local/lib/node_modules/n8n/dist/license.js:ro
     environment:
-      - N8N_USER_FOLDER=/home/node/
       - GENERIC_TIMEZONE=Asia/Shanghai
-      - TZ=Asia/Shanghai
-      - DB_SQLITE_VACUUM_ON_STARTUP=true
-      - DB_SQLITE_POOL_SIZE=1
-      - EXECUTIONS_DATA_PRUNE=true
-      - EXECUTIONS_DATA_MAX_AGE=168
-      - EXECUTIONS_DATA_PRUNE_MAX_COUNT=5000
-      - N8N_SECURE_COOKIE=true
-      - WEBHOOK_URL=https://你的域名/
-      - N8N_PROXY_HOPS=1
-      - N8N_TRUSTED_PROXIES=0.0.0.0/0
-      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
-      - N8N_GIT_NODE_DISABLE_BARE_REPOS=true
-      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
-      - N8N_RUNNERS_ENABLED=true
-      - N8N_RUNNERS_MODE=external
-      - N8N_RUNNERS_BROKER_LISTEN_ADDRESS=0.0.0.0
-      - N8N_RUNNERS_AUTH_TOKEN=任意一个随机字符串
-      - N8N_NATIVE_PYTHON_RUNNER=true
-    user: root
-    entrypoint:
-      - /bin/sh
-      - -c
-      - |
-        sed -i 's/isLicensed(feature) {/isLicensed(feature) { if (feature.endsWith("apiDisabled") || feature.endsWith("showNonProdBanner")) return false; return true; \/\/ /' /usr/local/lib/node_modules/n8n/dist/license.js && \
-        sed -i "s/getValue(feature) {/getValue(feature) { if (feature === 'planName') return 'Enterprise'; return -1; \/\/ /" /usr/local/lib/node_modules/n8n/dist/license.js && \
-        sed -i "s/getPlanName() {/getPlanName() { return 'Enterprise'; \/\/ /" /usr/local/lib/node_modules/n8n/dist/license.js && \
-        exec /docker-entrypoint.sh
-
-  task-runners:
-    image: n8nio/runners:1.111.0
-    environment:
-      - N8N_RUNNERS_TASK_BROKER_URI=http://n8n:5679
-      - N8N_RUNNERS_AUTH_TOKEN=任意一个随机字符串
-    depends_on:
-      - n8n
+      - N8N_DEFAULT_LOCALE=zh-CN
+      - N8N_OTEL_ENABLED=false
+      - N8N_SECURE_COOKIE=false
+      - NODE_FUNCTION_ALLOW_EXTERNAL=*
+    networks:
+      - 1panel-network
 ```
+
+> **关键点**：
+> - `license.js` 以 **`:ro`（只读）** 方式挂载，不需要 `user: root`
+> - 重启容器**不会**丢失数据
+> - 只部署了主应用，没有额外的 task-runners 等服务
+> - `hotwa/n8n-chinese` 是 n8n 的中文汉化版镜像，与官方版本同步更新推送
 
 ## 原理说明
 
@@ -70,24 +99,15 @@ n8n 在 `dist/license.js` 中定义了三个关键的验证方法：
 | 方法 | 作用 | 修改后行为 |
 |------|------|-----------|
 | `isLicensed(feature)` | 检查某功能是否授权 | 除 `apiDisabled` 和 `showNonProdBanner` 外全部返回 `true` |
-| `getValue(feature)` | 获取功能对应的值 | `planName` 返回 `"Enterprise"`，其余返回 `-1` |
-| `getPlanName()` | 获取当前计划名称 | 直接返回 `"Enterprise"` |
-
-通过容器 `entrypoint` 在 n8n 启动前执行 `sed` 命令，将这三个方法的返回值改写，从而实现全功能解锁。
-
-## 使用说明
-
-1. 将上面的 `docker-compose.yml` 保存到本地
-2. 修改 `WEBHOOK_URL` 和 `N8N_RUNNERS_AUTH_TOKEN` 为你自己的值
-3. 执行 `docker compose up -d` 启动
-
-> **注意**：必须设置 `user: root`，否则 `sed` 无法修改 `license.js` 文件。
+| `getValue(feature)` | 获取功能对应的值 | `planName` 返回 `Enterprise`，其余返回 `-1` |
+| `getPlanName()` | 获取当前计划名称 | 直接返回 `Enterprise` |
 
 ## 验证解锁成功
 
-启动后进入 n8n Web UI，在 **Settings → Usage and Plan** 中可以看到计划显示为 **Enterprise**，所有高级功能（Variables、External Secrets、Tags RBAC、Workflow History 等）均可正常使用。
+启动后进入 n8n Web UI，在 **Settings → Usage and Plan** 中可以看到计划显示为 **Enterprise**，所有高级功能均可正常使用。
 
 ## 参考链接
 
+- [hotwa/n8n-chinese Docker 镜像](https://hub.docker.com/r/hotwa/n8n-chinese)
 - [n8n 官方镜像](https://hub.docker.com/r/n8nio/n8n)
 - [原帖 Nodeseek](https://www.nodeseek.com/post-652639-1)
