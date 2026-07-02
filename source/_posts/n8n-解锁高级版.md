@@ -106,6 +106,10 @@ n8n 在 `dist/license.js` 中定义了三个关键的验证方法：
 
 启动后进入 n8n Web UI，在 **Settings → Usage and Plan** 中可以看到计划显示为 **Enterprise**，所有高级功能均可正常使用。
 
+![image-20260702140014859](https://picgo.19991029.xyz/image-20260702140014859.png)
+
+![image-20260702140049780](https://picgo.19991029.xyz/image-20260702140049780.png)
+
 ## 参考链接
 
 - [hotwa/n8n-chinese Docker 镜像](https://hub.docker.com/r/hotwa/n8n-chinese)
